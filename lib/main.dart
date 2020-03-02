@@ -9,14 +9,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "Welcome to Flutter",
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text("Example for Stateful"),
-        ),
-        body: Center(
-          child: RandomWords(),
-        ),
-      ),
+      home: RandomWords(),
     );
   }
 }
@@ -34,27 +27,36 @@ class RandomWordsState extends State<RandomWords> {
   Widget build(BuildContext context) {
     // TODO: implement build
     final wordPair = WordPair.random();
-    return ListView.builder(
-        itemBuilder: (context,index) {
-          if (index.isOdd) {
-            return Divider();
-          }
-          if (index>=_words.length) {
-            _words.addAll(generateWordPairs().take(10));
-          }
-          return _buildRow(_words[index]);
-    });
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Example for Stateful"),
+        actions: <Widget>[
+          new IconButton(icon: const Icon(Icons.list), onPressed: _pushSaved)
+        ],
+      ),
+      body: Center(child: ListView.builder(itemBuilder: (context, index) {
+        if (index.isOdd) {
+          return Divider();
+        }
+        if (index >= _words.length) {
+          _words.addAll(generateWordPairs().take(10));
+        }
+        return _buildRow(_words[index]);
+      })),
+    );
   }
+
   Widget _buildRow(WordPair wordPair) {
     final bool alreadySaved = _saved.contains(wordPair);
     return ListTile(
       title: Text(
         wordPair.asPascalCase,
-        style: _biggerFont ,
+        style: _biggerFont,
       ),
       trailing: new Icon(
-        alreadySaved? Icons.favorite: Icons.favorite_border,
-        color: alreadySaved? Colors.red: null,),
+        alreadySaved ? Icons.favorite : Icons.favorite_border,
+        color: alreadySaved ? Colors.red : null,
+      ),
       onTap: () {
         setState(() {
           if (alreadySaved) {
@@ -65,5 +67,28 @@ class RandomWordsState extends State<RandomWords> {
         });
       },
     );
+  }
+
+  void _pushSaved() {
+    Navigator.of(context)
+        .push(new MaterialPageRoute(builder: (BuildContext context) {
+      final Iterable<ListTile> tiles = _saved.map((WordPair pair) {
+        return new ListTile(
+          title: new Text(
+            pair.asPascalCase,
+            style: _biggerFont,
+          ),
+        );
+      });
+      final List<Widget> divied = ListTile.divideTiles(tiles: tiles,context: context).toList();
+      return new Scaffold(
+        appBar: new AppBar(
+          title: const Text("Saved List"),
+        ),
+        body: new ListView(
+          children: divied,
+        ),
+      );
+    }));
   }
 }
