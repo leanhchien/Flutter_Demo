@@ -1,3 +1,7 @@
+import 'package:demo/HomeVC.dart';
+import 'package:demo/RateVC.dart';
+import 'package:demo/TradeCoinVC.dart';
+import 'package:demo/TradeFXVC.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
@@ -5,85 +9,64 @@ import 'package:websocket_manager/websocket_manager.dart';
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatefulWidget {
-  @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  final TextEditingController _urlController = TextEditingController(text: "wss://api.coin.z.com/ws/public/v1");
-  final TextEditingController _messageController = TextEditingController();
-  WebsocketManager socket;
-  String _message = '';
-  String _closeMessage = '';
-
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    const param = '{"command": "subscribe","channel": "ticker","symbol": "BTC"}';
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text("Websocket Manager Example"),
-        ),
-        body: Column(
-          children: <Widget>[
-            TextField(controller: _urlController,),
-            Wrap(children: <Widget>[
-              RaisedButton(child: Text('Config'), onPressed: () => socket = WebsocketManager(_urlController.text),),
-              RaisedButton(child: Text('Connect'),onPressed: () {
-                if (socket != null) {
-                  print("Connect Socket");
-                  socket.connect();
-                }
-              },),
-              RaisedButton(child: Text('Close'),onPressed: () {
-                if (socket != null) {
-                  socket.close();
-                }
-              },),
-              RaisedButton(child: Text("Listen Message"),onPressed: () {
-                if (socket != null) {
-                  socket.onMessage((dynamic message) {
-                    print('New message: $message');
-                    setState(() {
-                      _message = message.toString();
-                    });
-                  });
-                }
-              },),
-              RaisedButton(child: Text('Listen Done'),onPressed: () {
-                if (socket != null) {
-                  socket.onClose((dynamic message) {
-                    print('Close Message $message');
-                    setState(() {
-                      _closeMessage = message.toString();
-                    });
-                  });
-                }
-              },),
-              RaisedButton(child: Text('Echo Test'),onPressed: () => WebsocketManager.echoTest(),)
-            ],),
-            TextField(controller: _messageController,decoration: InputDecoration(suffix: IconButton(icon: Icon(Icons.send),onPressed: () {
-              if (socket != null) {
-                socket.send(param);
-              }
-            },)),),
-            Text('Received message:'),
-            Text(_message),
-            Text('Close message:'),
-            Text(_closeMessage),
-          ],
-        ),
-      ),
+    final tabController = new DefaultTabController(
+        length: 4,
+        child: new Scaffold(
+          appBar: new AppBar(
+            title: new Text("ChienLa"),
+            bottom: new TabBar(indicatorColor: Colors.red,indicatorWeight: 2.0, tabs: [
+              new Tab(icon: new Icon(Icons.home),text: "Home",),
+              new Tab(icon: new Icon(Icons.attach_money),text: "TradeFx",),
+              new Tab(icon: new Icon(Icons.lens),text: "TradCoin",),
+              new Tab(icon: new Icon(Icons.insert_emoticon),text: "Rate",),
+            ]),
+          ),
+          body: new TabBarView(children: [
+            new HomeVC(),
+            new TradeFXVC(),
+            new TradeCoinScreen(),
+            new RateScreen()
+          ]),
+        ));
+
+    return new MaterialApp(
+      title: "Tab example",
+      home: tabController,
     );
   }
 }
+
+//class MyApp extends StatefulWidget {
+//  @override
+//  _MyAppState createState() => _MyAppState();
+//}
+//
+//class _MyAppState extends State<MyApp> {
+//  @override
+//  void initState() {
+//    super.initState();
+//  }
+//
+//  @override
+//  Widget build(BuildContext context) {
+//    // TODO: implement build
+//    return MaterialApp(
+//      home: Scaffold(
+//        appBar: AppBar(
+//          title: const Text("トレード"),
+//        ),
+//        body: Column(
+//          children: <Widget>[
+//            Text('SocketManager'),
+//          ],
+//        ),
+//      ),
+//    );
+//  }
+//}
 
 // Demo ListView
 //void main() => runApp(MyApp());
