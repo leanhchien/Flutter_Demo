@@ -28,14 +28,23 @@ class TradeCoinVC extends State<TradeCoinScreen> {
 
     });
     final bool already = orderBookData.channel.contains("orderbook");
-    return Scaffold(
-      body: Column(
-        children: <Widget>[
-          Text(already ? "Channel: ${orderBookData.channel}" : "Channel:" ),
-          Text(already ? "Bids: ${orderBookData.bids}" : "Bids:" ),
-          Text(already ? "Asks: ${orderBookData.bids}" : "Asks:" )
-        ],
-      ),
+    return ListView.builder(itemBuilder: (context, index) {
+      return GestureDetector(
+        child: Container(
+          padding: EdgeInsets.all(10.0),
+          color: index % 2 == 0? Colors.red : Colors.amber,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              new Text("Price: ${orderBookData.bids[index].price}", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14.0),),
+              new Text("Size: ${orderBookData.bids[index].size}", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14.0),)
+            ],
+          ),
+        ),
+      );
+    },
+      itemCount: orderBookData.bids.length,
     );
   }
 }

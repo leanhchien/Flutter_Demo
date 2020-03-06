@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:demo/TradeFx/DummyData.dart';
 
 class HomeVC extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return new Center(
-      child: new Text("Home", style: new TextStyle(fontSize: 25.0),)
+    return new Container(
+      decoration: new BoxDecoration(color: Colors.red),
+      child: new Center(
+        child: Text("ChienLa"),
+      ),
     );
   }
 }

@@ -1,7 +1,7 @@
 import 'package:demo/HomeVC.dart';
 import 'package:demo/RateVC.dart';
 import 'package:demo/TradeCoinVC.dart';
-import 'package:demo/TradeFXVC.dart';
+import 'package:demo/TradeFx/TradeFXVC.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
@@ -15,14 +15,14 @@ class MyApp extends StatelessWidget {
     final tabController = new DefaultTabController(
         length: 4,
         child: new Scaffold(
-          appBar: new AppBar(
-            title: new Text("ChienLa"),
-            bottom: new TabBar(indicatorColor: Colors.red,indicatorWeight: 2.0, tabs: [
+          bottomNavigationBar: BottomAppBar(
+            child: new TabBar(indicatorColor: Colors.red,indicatorWeight: 2.0, tabs: [
               new Tab(icon: new Icon(Icons.home),text: "Home",),
               new Tab(icon: new Icon(Icons.attach_money),text: "TradeFx",),
               new Tab(icon: new Icon(Icons.lens),text: "TradCoin",),
               new Tab(icon: new Icon(Icons.insert_emoticon),text: "Rate",),
             ]),
+            color: Color(0xFF1A237E),
           ),
           body: new TabBarView(children: [
             new HomeVC(),
@@ -35,6 +35,7 @@ class MyApp extends StatelessWidget {
     return new MaterialApp(
       title: "Tab example",
       home: tabController,
+      theme: ThemeData(scaffoldBackgroundColor: Colors.black),
     );
   }
 }

@@ -83,3 +83,25 @@ class BIDASK {
     size= json['size'] ?? '';
   }
 }
+
+class InterestSumaryData {
+  final String typeMoney;
+  final String typeBidAsk;
+  final String interestQuantity;
+  final String underCover;
+  final String average;
+  final String evaluationRate;
+  final String valuation;
+  final String swap;
+
+  const InterestSumaryData({
+   this.typeMoney,
+   this.typeBidAsk,
+   this.interestQuantity,
+   this.underCover,
+   this.average,
+   this.evaluationRate,
+   this.valuation,
+   this.swap
+  });
+}
