@@ -16,17 +16,17 @@ class TradeCoinVC extends State<TradeCoinScreen> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    SocketManager socket = SocketManager();
-    socket.initSocket();
-    socket.subscriberOrderBook();
-    socket.onMessage((dynamic message) {
-      print("Message: $message");
-      setState(() {
-        final body = json.decode(message);
-        orderBookData = OrderBook.fromJson(body);
-      });
-
-    });
+//    SocketManager socket = SocketManager();
+//    socket.initSocket();
+//    socket.subscriberOrderBook();
+//    socket.onMessage((dynamic message) {
+//      print("Message: $message");
+//      setState(() {
+//        final body = json.decode(message);
+//        orderBookData = OrderBook.fromJson(body);
+//      });
+//
+//    });
     final bool already = orderBookData.channel.contains("orderbook");
     return ListView.builder(itemBuilder: (context, index) {
       return GestureDetector(

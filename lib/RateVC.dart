@@ -16,17 +16,17 @@ class RateVC extends State<RateScreen> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    SocketManager socket = SocketManager();
-    socket.initSocket();
-    //socket.subscriberTicker();
-    socket.onMessage((dynamic message) {
-      print("Message: $message");
-      setState(() {
-        final body = json.decode(message);
-        rateData = Rate.fromJson(body);
-      });
-
-    });
+//    SocketManager socket = SocketManager();
+//    socket.initSocket();
+//    //socket.subscriberTicker();
+//    socket.onMessage((dynamic message) {
+//      print("Message: $message");
+//      setState(() {
+//        final body = json.decode(message);
+//        rateData = Rate.fromJson(body);
+//      });
+//
+//    });
     final bool already = rateData.channel.contains("ticker");
     return Scaffold(
       body: Column(

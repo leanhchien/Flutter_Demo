@@ -4,8 +4,6 @@ import 'package:demo/TradeCoinVC.dart';
 import 'package:demo/TradeFx/TradeFXVC.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:english_words/english_words.dart';
-import 'package:websocket_manager/websocket_manager.dart';
 
 void main() => runApp(MyApp());
 
@@ -18,11 +16,11 @@ class MyApp extends StatelessWidget {
           bottomNavigationBar: BottomAppBar(
             child: new TabBar(indicatorColor: Colors.red,indicatorWeight: 2.0, tabs: [
               new Tab(icon: new Icon(Icons.home),text: "Home",),
-              new Tab(icon: new Icon(Icons.attach_money),text: "TradeFx",),
-              new Tab(icon: new Icon(Icons.lens),text: "TradCoin",),
+              new Tab(icon: new Icon(Icons.attach_money),text: "Trade",),
+              new Tab(icon: new Icon(Icons.lens),text: "Chart",),
               new Tab(icon: new Icon(Icons.insert_emoticon),text: "Rate",),
             ]),
-            color: Color(0xFF1A237E),
+            color: Color.fromARGB(1, 22, 27, 43),
           ),
           body: new TabBarView(children: [
             new HomeVC(),
@@ -35,7 +33,7 @@ class MyApp extends StatelessWidget {
     return new MaterialApp(
       title: "Tab example",
       home: tabController,
-      theme: ThemeData(scaffoldBackgroundColor: Colors.black),
+      theme: ThemeData(scaffoldBackgroundColor: Color(0x081623)),
     );
   }
 }
@@ -82,81 +80,3 @@ class MyApp extends StatelessWidget {
 //  }
 //}
 //
-//class RandomWords extends StatefulWidget {
-//  @override
-//  RandomWordsState createState() => new RandomWordsState();
-//}
-//
-//class RandomWordsState extends State<RandomWords> {
-//  final List<WordPair> _words = <WordPair>[];
-//  final _biggerFont = const TextStyle(fontSize: 18.0);
-//  final Set<WordPair> _saved = new Set<WordPair>();
-//  @override
-//  Widget build(BuildContext context) {
-//    // TODO: implement build
-//    final wordPair = WordPair.random();
-//    return Scaffold(
-//      appBar: AppBar(
-//        title: Text("Example for Stateful"),
-//        actions: <Widget>[
-//          new IconButton(icon: const Icon(Icons.list), onPressed: _pushSaved)
-//        ],
-//      ),
-//      body: Center(child: ListView.builder(itemBuilder: (context, index) {
-//        if (index.isOdd) {
-//          return Divider();
-//        }
-//        if (index >= _words.length) {
-//          _words.addAll(generateWordPairs().take(10));
-//        }
-//        return _buildRow(_words[index]);
-//      })),
-//    );
-//  }
-//
-//  Widget _buildRow(WordPair wordPair) {
-//    final bool alreadySaved = _saved.contains(wordPair);
-//    return ListTile(
-//      title: Text(
-//        wordPair.asPascalCase,
-//        style: _biggerFont,
-//      ),
-//      trailing: new Icon(
-//        alreadySaved ? Icons.favorite : Icons.favorite_border,
-//        color: alreadySaved ? Colors.red : null,
-//      ),
-//      onTap: () {
-//        setState(() {
-//          if (alreadySaved) {
-//            _saved.remove(wordPair);
-//          } else {
-//            _saved.add(wordPair);
-//          }
-//        });
-//      },
-//    );
-//  }
-//
-//  void _pushSaved() {
-//    Navigator.of(context)
-//        .push(new MaterialPageRoute(builder: (BuildContext context) {
-//      final Iterable<ListTile> tiles = _saved.map((WordPair pair) {
-//        return new ListTile(
-//          title: new Text(
-//            pair.asPascalCase,
-//            style: _biggerFont,
-//          ),
-//        );
-//      });
-//      final List<Widget> divied = ListTile.divideTiles(tiles: tiles,context: context).toList();
-//      return new Scaffold(
-//        appBar: new AppBar(
-//          title: const Text("Saved List"),
-//        ),
-//        body: new ListView(
-//          children: divied,
-//        ),
-//      );
-//    }));
-//  }
-//}
