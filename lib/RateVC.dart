@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:demo/SocketManager.dart';
 import 'package:demo/Model.dart';
-import 'dart:convert';
 
 class RateScreen extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
     return RateVC();
   }
 }
@@ -15,7 +12,6 @@ class RateVC extends State<RateScreen> {
   Rate rateData;
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
 //    SocketManager socket = SocketManager();
 //    socket.initSocket();
 //    //socket.subscriberTicker();

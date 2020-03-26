@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:demo/SocketManager.dart';
 import 'package:demo/Model.dart';
-import 'dart:convert';
 
 class TradeCoinScreen extends StatefulWidget {
   @override
